@@ -43,7 +43,7 @@ function SearchFrom( {placeholder, data}) {
             </div>
             {filteredData.length != 0 && (
                 <div className='dataresults' onClick={fillSearch}>
-                    {filteredData.slice(0, 5).map((value, key) => {
+                    {filteredData.slice(0, 15).map((value, key) => {
                         return <div className='dataitem'>{value.city}, {value.country}{value.iata != "" ? ` (${value.iata})` : "" }</div>;
                     })}
                 </div>
