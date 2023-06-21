@@ -4,6 +4,7 @@ import SearchFrom from "../components/SearchFrom";
 import SearchTo from "../components/SearchTo";
 import AirportData from "../airports.json";
 import DepartDate from "../components/DepartDate";
+import ReturnDate from "../components/ReturnDate";
 
 function Home() {
 	return (
@@ -13,6 +14,7 @@ function Home() {
 				<SearchFrom placeholder="Country/city" data={AirportData} />
 				<SearchTo placeholder="Country/city" data={AirportData} />
 				<DepartDate />
+				<ReturnDate />
 			</div>
 		</div>
 	);
