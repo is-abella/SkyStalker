@@ -19,10 +19,6 @@
 	padding: 4px;
 }
 
-.searchbar:focus {
-	border: 5px solid black;
-}
-
 .text {
 	padding: 2.5px;
 }
