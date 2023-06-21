@@ -1,0 +1,12 @@
+#datepicker {
+	border: 1px solid black;
+	border-radius: 5px;
+	display: flex;
+	padding: 4px;
+	width: 222.5px;
+	height: 39px;
+}
+
+.react-datepicker__close-icon::after {
+	background-color: black;
+}
