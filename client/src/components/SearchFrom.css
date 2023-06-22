@@ -1,0 +1,50 @@
+.searchfrom {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+
+.label {
+	margin-bottom: 2;
+	font-size: smaller;
+	font-weight: normal;
+	color: black;
+}
+
+.searchbar {
+	border: 1px solid black;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
+}
+
+.text {
+	padding: 2.5px;
+}
+
+.text:focus {
+	outline: none;
+}
+
+.dataresults {
+	margin-top: 5px;
+	height: 200px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.dataresults::-webkit-scrollbar {
+	display: none;
+}
+
+.dataitem {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	color: black;
+}
+
+.dataitem:hover {
+	background-color: lightgray;
+}

@@ -1,0 +1,16 @@
+.css-13cymwt-control {
+	border: none;
+	outline: none;
+	flex-wrap: none;
+}
+
+.css-13cymwt-control:focus {
+	border: none;
+	outline: none;
+}
+
+.basic-single {
+	display: flex;
+	border: 1px solid black;
+	border-radius: 5px;
+}
