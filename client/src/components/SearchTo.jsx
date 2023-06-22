@@ -1,55 +1,77 @@
-import React , { useState } from 'react'
-import "./SearchTo.css"
-import ClearIcon from '@mui/icons-material/Clear';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from "react";
+import "./SearchTo.css";
+import ClearIcon from "@mui/icons-material/Clear";
+import SearchIcon from "@mui/icons-material/Search";
 
-function SearchTo( {placeholder, data}) {
-    const [filteredData, setFilteredData] = useState([]);
-    const [wordEntered, setWordEntered] = useState("");
+function SearchTo({ placeholder, data, setToInput }) {
+	const [filteredData, setFilteredData] = useState([]);
+	const [toInput, setLocalToInput] = useState("");
 
-    const handleFilter = (event) => {
-        const searchTo = event.target.value;
-        setWordEntered(searchTo);
-        const newFilter = Object.values(data).filter((value) => {
-            return value.city.toLowerCase().startsWith(searchTo) || value.country.toLowerCase().startsWith(searchTo)
-        });
-        if (searchTo === "") {
-            setFilteredData([])
-        } else {
-            setFilteredData(newFilter);
-        }
-    }
+	const handleFilter = (event) => {
+		const searchTo = event.target.value;
+		setLocalToInput(searchTo);
+		const newFilter = Object.values(data).filter((value) => {
+			return (
+				value.city.toLowerCase().startsWith(searchTo) ||
+				value.country.toLowerCase().startsWith(searchTo)
+			);
+		});
+		if (searchTo === "") {
+			setFilteredData([]);
+		} else {
+			setFilteredData(newFilter);
+		}
+	};
 
-    const fillSearch = (event) => {
-        const fillItem = event.target.innerHTML; //not sure if innerHTML is right
-        setFilteredData([]);
-        setWordEntered(fillItem);
-    }
+	const fillSearch = (event) => {
+		const fillItem = event.target.innerHTML; //not sure if innerHTML is right
+		setFilteredData([]);
+		setLocalToInput(fillItem);
+		setToInput(fillItem);
+	};
 
-    const clearSearch = () => {
-        setFilteredData([]);
-        setWordEntered("");
-    }
-    return (
-        <div className="searchto">
-            <label for="to" className="label">To</label>
-            <div className='searchbar'>
-                <input type='text' id='to' className='text' value={wordEntered} placeholder={placeholder} onChange={handleFilter}/>
-                <div className='icon'>{wordEntered.length === 0 ? (
-                    <SearchIcon />
-                ) : (
-                <ClearIcon id="clearbtn" onClick={clearSearch} />
-                )}</div>
-            </div>
-            {filteredData.length != 0 && (
-                <div className='dataresults' onClick={fillSearch}>
-                    {filteredData.slice(0, 15).map((value, key) => {
-                        return <div className='dataitem'>{value.city}, {value.country}{value.iata != "" ? ` (${value.iata})` : "" }</div>;
-                    })}
-                </div>
-            )}
-        </div>
-    )
+	const clearSearch = () => {
+		setFilteredData([]);
+		setLocalToInput("");
+		setToInput("");
+	};
+	return (
+		<div className="searchto">
+			<label for="to" className="label">
+				To
+			</label>
+			<div className="searchbar">
+				<input
+					type="text"
+					id="to"
+					className="text"
+					value={toInput}
+					placeholder={placeholder}
+					onChange={handleFilter}
+					autoComplete="off"
+				/>
+				<div className="icon">
+					{toInput.length === 0 ? (
+						<SearchIcon />
+					) : (
+						<ClearIcon id="clearbtn" onClick={clearSearch} />
+					)}
+				</div>
+			</div>
+			{filteredData.length !== 0 && (
+				<div className="dataresults" onClick={fillSearch}>
+					{filteredData.slice(0, 15).map((value, key) => {
+						return (
+							<div className="dataitem">
+								{value.city}, {value.country}
+								{value.iata !== "" ? ` (${value.iata})` : ""}
+							</div>
+						);
+					})}
+				</div>
+			)}
+		</div>
+	);
 }
-        
-export default SearchTo
+
+export default SearchTo;

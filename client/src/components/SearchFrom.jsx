@@ -3,13 +3,13 @@ import "./SearchFrom.css";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 
-function SearchFrom({ placeholder, data }) {
+function SearchFrom({ placeholder, data, setFromInput }) {
 	const [filteredData, setFilteredData] = useState([]);
-	const [wordEntered, setWordEntered] = useState("");
+	const [fromInput, setLocalFromInput] = useState("");
 
 	const handleFilter = (event) => {
 		const searchFrom = event.target.value;
-		setWordEntered(searchFrom);
+		setLocalFromInput(searchFrom);
 		const newFilter = Object.values(data).filter((value) => {
 			return (
 				value.city.toLowerCase().startsWith(searchFrom) ||
@@ -26,16 +26,19 @@ function SearchFrom({ placeholder, data }) {
 	const fillSearch = (event) => {
 		const fillItem = event.target.innerHTML; //not sure if innerHTML is right
 		setFilteredData([]);
-		setWordEntered(fillItem);
+		setLocalFromInput(fillItem);
+		setFromInput(fillItem);
 	};
 
 	const clearSearch = () => {
 		setFilteredData([]);
-		setWordEntered("");
+		setLocalFromInput("");
+		setFromInput("");
 	};
+
 	return (
 		<div className="searchfrom">
-			<label for="from" className="label">
+			<label htmlFor="from" className="label">
 				From
 			</label>
 			<div className="searchbar">
@@ -43,25 +46,26 @@ function SearchFrom({ placeholder, data }) {
 					type="text"
 					id="from"
 					className="text"
-					value={wordEntered}
+					value={fromInput}
 					placeholder={placeholder}
 					onChange={handleFilter}
+					autoComplete="off"
 				/>
 				<div className="icon">
-					{wordEntered.length === 0 ? (
+					{fromInput.length === 0 ? (
 						<SearchIcon />
 					) : (
 						<ClearIcon id="clearbtn" onClick={clearSearch} />
 					)}
 				</div>
 			</div>
-			{filteredData.length != 0 && (
+			{filteredData.length !== 0 && (
 				<div className="dataresults" onClick={fillSearch}>
 					{filteredData.slice(0, 15).map((value, key) => {
 						return (
-							<div className="dataitem">
+							<div className="dataitem" key={key}>
 								{value.city}, {value.country}
-								{value.iata != "" ? ` (${value.iata})` : ""}
+								{value.iata !== "" ? ` (${value.iata})` : ""}
 							</div>
 						);
 					})}
