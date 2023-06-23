@@ -1,23 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import "./CabinClass.css";
 
-function CabinClass() {
-	const options = [
-		{ value: "economy", label: "Economy" },
-		{ value: "premium economy", label: "Premium Economy" },
-		{ value: "business class", label: "Business Class" },
-		{ value: "first class", label: "First Class" },
-	];
+function CabinClass({ cabinClassOptions, selectedCabinClass, setCabinClass }) {
 	return (
 		<div>
 			<div className="label">Cabin Class</div>
 			<Select
 				className="basic-single"
 				classNamePrefix="select"
-				defaultValue={options[0]}
+				defaultValue={selectedCabinClass}
 				name="cabin-class"
-				options={options}
+				options={cabinClassOptions}
+				onChange={(inputValue) => setCabinClass(inputValue.value)}
 			/>
 		</div>
 	);
