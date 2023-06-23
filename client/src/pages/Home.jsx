@@ -13,25 +13,51 @@ function Home() {
 	const navigate = useNavigate();
 	const [fromInput, setFromInput] = useState("");
 	const [toInput, setToInput] = useState("");
+	const [departDate, setDepartDate] = useState(new Date());
+	const [returnDate, setReturnDate] = useState(new Date());
+	const [adults, setAdults] = useState(1);
+	const [children, setChildren] = useState(0);
+	const [cabinClass, setCabinClass] = useState("Economy");
+
+	const cabinClassOptions = [
+		{ value: "Economy", label: "Economy" },
+		{ value: "Premium Economy", label: "Premium Economy" },
+		{ value: "Business Class", label: "Business Class" },
+		{ value: "First Class", label: "First Class" },
+	];
 
 	const handleSearch = () => {
-		navigate("/results", { state: { fromInput: fromInput, toInput: toInput } });
+		navigate("/results", {
+			state: {
+				fromInput: fromInput,
+				toInput: toInput,
+				departDate: departDate,
+				returnDate: returnDate,
+				adults: adults,
+				children: children,
+				cabinClass: cabinClass,
+			},
+		});
 	};
 
 	return (
 		<div>
 			<Header />
-			<div className="flex gap-2 justify-center">
+			<div className="flex gap-2 justify-center shrink-0">
 				<SearchFrom
 					placeholder="Country/city"
 					data={AirportData}
 					setFromInput={setFromInput}
 				/>
 				<SearchTo placeholder="Country/city" data={AirportData} setToInput={setToInput} />
-				<DepartDate />
-				<ReturnDate />
-				<Travellers />
-				<CabinClass />
+				<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
+				<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
+				<Travellers setAdults={setAdults} setChildren={setChildren} />
+				<CabinClass
+					cabinClassOptions={cabinClassOptions}
+					selectedCabinClass={cabinClass}
+					setCabinClass={setCabinClass}
+				/>
 				<button onClick={handleSearch}>Search</button>
 			</div>
 		</div>
