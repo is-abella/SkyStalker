@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Travellers.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Travellers() {
+function Travellers({ setAdults, setChildren }) {
 	const [openOptions, setOpenOptions] = useState(false);
 	const [options, setOptions] = useState({
 		adult: 1,
 		children: 0,
 	});
+
+	useEffect(() => {
+		setAdults(options.adult);
+		setChildren(options.children);
+	}, [options, setAdults, setChildren]);
 
 	const handleOption = (name, operation) => {
 		setOptions((prev) => {
