@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import SearchFrom from "../components/SearchFrom";
 import SearchTo from "../components/SearchTo";
-import AirportData from "../airports.json";
+import AirportData from "../airports-code.json";
 import DepartDate from "../components/DepartDate";
 import ReturnDate from "../components/ReturnDate";
 import CabinClass from "../components/CabinClass";
@@ -45,11 +45,15 @@ function Home() {
 			<Header />
 			<div className="flex gap-2 justify-center shrink-0">
 				<SearchFrom
-					placeholder="Country/city"
+					placeholder="Country/city/airport code"
 					data={AirportData}
 					setFromInput={setFromInput}
 				/>
-				<SearchTo placeholder="Country/city" data={AirportData} setToInput={setToInput} />
+				<SearchTo
+					placeholder="Country/city/airport code"
+					data={AirportData}
+					setToInput={setToInput}
+				/>
 				<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
 				<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
 				<Travellers setAdults={setAdults} setChildren={setChildren} />
