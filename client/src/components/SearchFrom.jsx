@@ -10,10 +10,11 @@ function SearchFrom({ placeholder, data, setFromInput }) {
 	const handleFilter = (event) => {
 		const searchFrom = event.target.value;
 		setLocalFromInput(searchFrom);
-		const newFilter = Object.values(data).filter((value) => {
+		const newFilter = data.filter((value) => {
 			return (
-				value.city.toLowerCase().startsWith(searchFrom) ||
-				value.country.toLowerCase().startsWith(searchFrom)
+				value.city_name.toLowerCase().startsWith(searchFrom) ||
+				value.country_name.toLowerCase().startsWith(searchFrom) ||
+				value.column_1.toLowerCase().startsWith(searchFrom)
 			);
 		});
 		if (searchFrom === "") {
@@ -64,8 +65,8 @@ function SearchFrom({ placeholder, data, setFromInput }) {
 					{filteredData.slice(0, 15).map((value, key) => {
 						return (
 							<div className="dataitem" key={key}>
-								{value.city}, {value.country}
-								{value.iata !== "" ? ` (${value.iata})` : ""}
+								{value.city_name}, {value.country_name}
+								{` (${value.column_1})`}
 							</div>
 						);
 					})}
