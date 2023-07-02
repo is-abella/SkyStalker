@@ -3,17 +3,21 @@ import "./Travellers.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Travellers({ setAdults, setChildren }) {
+function Travellers({ setTravellers }) {
 	const [openOptions, setOpenOptions] = useState(false);
 	const [options, setOptions] = useState({
 		adult: 1,
+		students: 0,
+		youths: 0,
 		children: 0,
+		toddlers: 0,
+		infants: 0,
 	});
+	const travellersSum = Object.values(options).reduce((a, b) => a + b, 0);
 
 	useEffect(() => {
-		setAdults(options.adult);
-		setChildren(options.children);
-	}, [options, setAdults, setChildren]);
+		setTravellers(travellersSum);
+	}, [options, setTravellers]);
 
 	const handleOption = (name, operation) => {
 		setOptions((prev) => {
@@ -27,13 +31,13 @@ function Travellers({ setAdults, setChildren }) {
 	return (
 		<div className="travellers">
 			<div className="label">Travellers</div>
-			<span
-				onClick={() => setOpenOptions(!openOptions)}
-				className="searchbar">{`${options.adult} adult · ${options.children} children`}</span>
+			<span onClick={() => setOpenOptions(!openOptions)} className="searchbar">
+				{travellersSum > 1 ? `${travellersSum} travellers` : `${options.adult} adult`}
+			</span>
 			{openOptions && (
 				<div className="options">
 					<div className="optionItem">
-						<span className="optionText">Adults</span>
+						<span className="optionText">Adults 18+</span>
 						<div className="optionCounter">
 							{options.adult > 1 && (
 								<RemoveIcon
@@ -49,7 +53,39 @@ function Travellers({ setAdults, setChildren }) {
 						</div>
 					</div>
 					<div className="optionItem">
-						<span className="optionText">Children</span>
+						<span className="optionText">Students over 18</span>
+						<div className="optionCounter">
+							{options.students > 0 && (
+								<RemoveIcon
+									className="optionCounterButton"
+									onClick={() => handleOption("students", "d")}
+								/>
+							)}
+							<span className="optionCounterNumber">{options.students}</span>
+							<AddIcon
+								className="optionCounterButton"
+								onClick={() => handleOption("students", "i")}
+							/>
+						</div>
+					</div>
+					<div className="optionItem">
+						<span className="optionText">Youths 12-17</span>
+						<div className="optionCounter">
+							{options.youths > 0 && (
+								<RemoveIcon
+									className="optionCounterButton"
+									onClick={() => handleOption("youths", "d")}
+								/>
+							)}
+							<span className="optionCounterNumber">{options.youths}</span>
+							<AddIcon
+								className="optionCounterButton"
+								onClick={() => handleOption("youths", "i")}
+							/>
+						</div>
+					</div>
+					<div className="optionItem">
+						<span className="optionText">Children 2-11</span>
 						<div className="optionCounter">
 							{options.children > 0 && (
 								<RemoveIcon
@@ -61,6 +97,38 @@ function Travellers({ setAdults, setChildren }) {
 							<AddIcon
 								className="optionCounterButton"
 								onClick={() => handleOption("children", "i")}
+							/>
+						</div>
+					</div>
+					<div className="optionItem">
+						<span className="optionText">Toddlers in own seat under 2</span>
+						<div className="optionCounter">
+							{options.toddlers > 0 && (
+								<RemoveIcon
+									className="optionCounterButton"
+									onClick={() => handleOption("toddlers", "d")}
+								/>
+							)}
+							<span className="optionCounterNumber">{options.toddlers}</span>
+							<AddIcon
+								className="optionCounterButton"
+								onClick={() => handleOption("toddlers", "i")}
+							/>
+						</div>
+					</div>
+					<div className="optionItem">
+						<span className="optionText">Infants on lap under 2</span>
+						<div className="optionCounter">
+							{options.infants > 0 && (
+								<RemoveIcon
+									className="optionCounterButton"
+									onClick={() => handleOption("todinfantsdlers", "d")}
+								/>
+							)}
+							<span className="optionCounterNumber">{options.infants}</span>
+							<AddIcon
+								className="optionCounterButton"
+								onClick={() => handleOption("infants", "i")}
 							/>
 						</div>
 					</div>
