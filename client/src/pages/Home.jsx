@@ -15,15 +15,14 @@ function Home() {
 	const [toInput, setToInput] = useState("");
 	const [departDate, setDepartDate] = useState(new Date());
 	const [returnDate, setReturnDate] = useState(new Date());
-	const [adults, setAdults] = useState(1);
-	const [children, setChildren] = useState(0);
+	const [travellers, setTravellers] = useState(1);
 	const [cabinClass, setCabinClass] = useState("Economy");
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
 		{ value: "Premium Economy", label: "Premium Economy" },
-		{ value: "Business Class", label: "Business Class" },
-		{ value: "First Class", label: "First Class" },
+		{ value: "Business", label: "Business" },
+		{ value: "First", label: "First" },
 	];
 
 	const handleSearch = () => {
@@ -33,8 +32,7 @@ function Home() {
 				toInput: toInput,
 				departDate: departDate,
 				returnDate: returnDate,
-				adults: adults,
-				children: children,
+				travellers: travellers,
 				cabinClass: cabinClass,
 			},
 		});
@@ -56,7 +54,7 @@ function Home() {
 				/>
 				<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
 				<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
-				<Travellers setAdults={setAdults} setChildren={setChildren} />
+				<Travellers setTravellers={setTravellers} />
 				<CabinClass
 					cabinClassOptions={cabinClassOptions}
 					selectedCabinClass={cabinClass}
