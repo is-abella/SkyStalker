@@ -26,9 +26,15 @@ function SearchFrom({ placeholder, data, setFromInput }) {
 
 	const fillSearch = (event) => {
 		const fillItem = event.target.innerHTML; //not sure if innerHTML is right
-		setFilteredData([]);
-		setLocalFromInput(fillItem);
-		setFromInput(fillItem);
+		const regex = /\(([^)]+)\)/;
+		const matches = regex.exec(fillItem);
+
+		if (matches && matches.length > 1) {
+			const extractedValue = matches[1];
+			setFilteredData([]);
+			setFromInput(extractedValue);
+			setLocalFromInput(fillItem);
+		}
 	};
 
 	const clearSearch = () => {
