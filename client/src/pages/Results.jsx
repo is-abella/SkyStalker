@@ -13,8 +13,7 @@ function Results() {
 	const formatReturnDate = `${returnDate.getDate()}/${
 		returnDate.getMonth() + 1
 	}/${returnDate.getFullYear()}`;
-	const adults = location.state?.adults || 1;
-	const children = location.state?.children || 0;
+	const travellers = location.state?.travellers || 1;
 	const cabinClass = location.state?.cabinClass || "Economy";
 
 	return (
@@ -24,8 +23,7 @@ function Results() {
 			<div>To: {toInput}</div>
 			<div>Depart: {formatDepartDate}</div>
 			<div>Return: {formatReturnDate}</div>
-			<div>Adults: {adults}</div>
-			<div>Children: {children}</div>
+			<div>Travellers: {travellers}</div>
 			<div>Cabin class: {cabinClass}</div>
 		</div>
 	);
