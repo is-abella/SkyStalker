@@ -3,11 +3,10 @@ import "./Travellers.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Travellers({ setTravellers }) {
+function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddlers, setInfants }) {
 	const [openOptions, setOpenOptions] = useState(false);
 	const [options, setOptions] = useState({
 		adult: 1,
-		students: 0,
 		youths: 0,
 		children: 0,
 		toddlers: 0,
@@ -17,7 +16,12 @@ function Travellers({ setTravellers }) {
 
 	useEffect(() => {
 		setTravellers(travellersSum);
-	}, [options, setTravellers]);
+		setAdults(options.adult);
+		setYouths(options.youths);
+		setChildren(options.children);
+		setToddlers(options.toddlers);
+		setInfants(options.infants);
+	}, [options, setTravellers, setAdults, setYouths, setChildren, setToddlers, setInfants]);
 
 	const handleOption = (name, operation) => {
 		setOptions((prev) => {
@@ -49,22 +53,6 @@ function Travellers({ setTravellers }) {
 							<AddIcon
 								className="optionCounterButton"
 								onClick={() => handleOption("adult", "i")}
-							/>
-						</div>
-					</div>
-					<div className="optionItem">
-						<span className="optionText">Students over 18</span>
-						<div className="optionCounter">
-							{options.students > 0 && (
-								<RemoveIcon
-									className="optionCounterButton"
-									onClick={() => handleOption("students", "d")}
-								/>
-							)}
-							<span className="optionCounterNumber">{options.students}</span>
-							<AddIcon
-								className="optionCounterButton"
-								onClick={() => handleOption("students", "i")}
 							/>
 						</div>
 					</div>
