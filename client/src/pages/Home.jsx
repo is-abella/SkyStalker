@@ -17,6 +17,12 @@ function Home() {
 	const [returnDate, setReturnDate] = useState(new Date());
 	const [travellers, setTravellers] = useState(1);
 	const [cabinClass, setCabinClass] = useState("Economy");
+	//only for webscrapping part
+	const [adults, setAdults] = useState(1);
+	const [youths, setYouths] = useState(0);
+	const [children, setChildren] = useState(0);
+	const [toddlers, setToddlers] = useState(0);
+	const [infants, setInfants] = useState(0);
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
@@ -34,6 +40,11 @@ function Home() {
 				returnDate: returnDate,
 				travellers: travellers,
 				cabinClass: cabinClass,
+				adults: adults,
+				youths: youths,
+				children: children,
+				toddlers: toddlers,
+				infants: infants,
 			},
 		});
 	};
@@ -54,7 +65,14 @@ function Home() {
 				/>
 				<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
 				<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
-				<Travellers setTravellers={setTravellers} />
+				<Travellers
+					setTravellers={setTravellers}
+					setAdults={setAdults}
+					setYouths={setYouths}
+					setChildren={setChildren}
+					setToddlers={setToddlers}
+					setInfants={setInfants}
+				/>
 				<CabinClass
 					cabinClassOptions={cabinClassOptions}
 					selectedCabinClass={cabinClass}
