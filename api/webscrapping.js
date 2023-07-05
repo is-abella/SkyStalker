@@ -1,19 +1,18 @@
 import { Builder, By, Key, until } from "selenium-webdriver";
 import puppeteer from "puppeteer";
-
 /*
 const sampleInputs = {
-    Departure: 'SIN',
-    Arrival: 'LAX',
-    Date: '29/07/2023', //Format as DDMMYYYY, departure only
-    PassengerClass: 'First',  //Format as "Economy", "Premium Economy", "Business" and "First"
-    TripWay: 'One-way', //Format as "One-way" or "Round"
-    AdultNumber: 1, 
-    ToddlerNumber: 2,
-    InfantNumber:1,
-    ChildNumber: 1,
-    YouthNumber: 1,
-    customerEmail: "demeterrxy@gmail.com"
+	fromInput: "SIN",
+	toInput: "LAX",
+	departDate: "29/07/2023", //Format as DDMMYYYY, departure only
+	cabinClass: "First", //Format as "Economy", "Premium Economy", "Business" and "First"
+	TripWay: "One-way", //Format as "One-way" or "Round"
+	adults: 1,
+	toddlers: 2,
+	infants: 1,
+	children: 1,
+	youths: 1,
+	customerEmail: "demeterrxy@gmail.com",
 };*/
 
 async function findCheapestFlights(flightInfo) {
@@ -40,7 +39,7 @@ async function findCheapestFlights(flightInfo) {
 	//adults
 	const adultInc = '//button[@aria-label="Increment"]';
 	if (adultCount > 1) {
-		for (i = 0; i < adultCount - 1; i++) {
+		for (let i = 0; i < adultCount - 1; i++) {
 			await driver.wait(until.elementLocated(By.xpath(adultInc)), 5000).click();
 		}
 	}
@@ -48,26 +47,26 @@ async function findCheapestFlights(flightInfo) {
 	//children
 	const incButtons = await driver.findElements(By.xpath('//button[@aria-label="Increment"]'));
 	const childInc = incButtons[3];
-	for (i = 0; i < childCount; i++) {
+	for (let i = 0; i < childCount; i++) {
 		await childInc.click();
 	}
 
 	//toddlers
 	//const incButtons = await driver.findElements(By.xpath('//button[@aria-label="Increment"]'));
 	const toddlerInc = incButtons[4];
-	for (i = 0; i < toddlerCount; i++) {
+	for (let i = 0; i < toddlerCount; i++) {
 		await toddlerInc.click();
 	}
 
 	//infants
 	const infantInc = incButtons[5];
-	for (i = 0; i < infantCount; i++) {
+	for (let i = 0; i < infantCount; i++) {
 		await infantInc.click();
 	}
 
 	//youths
 	const youthInc = incButtons[2];
-	for (i = 0; i < youthCount; i++) {
+	for (let i = 0; i < youthCount; i++) {
 		await youthInc.click();
 	}
 
