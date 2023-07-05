@@ -32,6 +32,40 @@ function Home() {
 	];
 
 	const handleSearch = () => {
+		console.log("Search clicked");
+		// Prepare the request body
+		const requestBody = {
+			fromInput,
+			toInput,
+			departDate,
+			returnDate,
+			travellers,
+			cabinClass,
+			adults,
+			youths,
+			children,
+			toddlers,
+			infants,
+		};
+		// Make a POST request to the backend endpoint
+		fetch("http://localhost:3000/search", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(requestBody),
+		})
+			.then((response) => response.json())
+			.then((flightData) => {
+				// Handle the flight data received from the backend
+				console.log(flightData);
+				// Navigate to the results page or perform any other actions
+			})
+			.catch((error) => {
+				// Handle any errors that occurred during the request
+				console.error(error);
+			});
+		/*
 		navigate("/results", {
 			state: {
 				fromInput: fromInput,
@@ -45,8 +79,7 @@ function Home() {
 				children: children,
 				toddlers: toddlers,
 				infants: infants,
-			},
-		});
+			},*/
 	};
 
 	return (
