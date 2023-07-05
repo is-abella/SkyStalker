@@ -23,6 +23,7 @@ function Home() {
 	const [children, setChildren] = useState(0);
 	const [toddlers, setToddlers] = useState(0);
 	const [infants, setInfants] = useState(0);
+	const TripWay = "One-way"; //no selection function for one-way/return yet
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
@@ -34,11 +35,13 @@ function Home() {
 	const handleSearch = () => {
 		console.log("Search clicked");
 		// Prepare the request body
+		const departDateString = departDate.toLocaleDateString("en-GB");
+		const returnDateString = returnDate.toLocaleDateString("en-GB");
 		const requestBody = {
 			fromInput,
 			toInput,
-			departDate,
-			returnDate,
+			departDate: departDateString,
+			returnDate: returnDateString,
 			travellers,
 			cabinClass,
 			adults,
@@ -46,6 +49,7 @@ function Home() {
 			children,
 			toddlers,
 			infants,
+			TripWay,
 		};
 		// Make a POST request to the backend endpoint
 		fetch("http://localhost:3000/search", {
