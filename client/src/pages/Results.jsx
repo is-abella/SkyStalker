@@ -15,6 +15,7 @@ function Results() {
 	}/${returnDate.getFullYear()}`;
 	const travellers = location.state?.travellers || 1;
 	const cabinClass = location.state?.cabinClass || "Economy";
+	const flightData = location.state?.flightData || {};
 
 	return (
 		<div>
@@ -25,6 +26,7 @@ function Results() {
 			<div>Return: {formatReturnDate}</div>
 			<div>Travellers: {travellers}</div>
 			<div>Cabin class: {cabinClass}</div>
+			<pre>{JSON.stringify(flightData, null, 2)}</pre>
 		</div>
 	);
 }
