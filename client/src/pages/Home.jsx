@@ -61,29 +61,27 @@ function Home() {
 		})
 			.then((response) => response.json())
 			.then((flightData) => {
-				// Handle the flight data received from the backend
-				console.log(flightData);
-				// Navigate to the results page or perform any other actions
+				navigate("/results", {
+					state: {
+						fromInput: fromInput,
+						toInput: toInput,
+						departDate: departDate,
+						returnDate: returnDate,
+						travellers: travellers,
+						cabinClass: cabinClass,
+						adults: adults,
+						youths: youths,
+						children: children,
+						toddlers: toddlers,
+						infants: infants,
+						flightData,
+					},
+				});
 			})
 			.catch((error) => {
 				// Handle any errors that occurred during the request
 				console.error(error);
 			});
-		/*
-		navigate("/results", {
-			state: {
-				fromInput: fromInput,
-				toInput: toInput,
-				departDate: departDate,
-				returnDate: returnDate,
-				travellers: travellers,
-				cabinClass: cabinClass,
-				adults: adults,
-				youths: youths,
-				children: children,
-				toddlers: toddlers,
-				infants: infants,
-			},*/
 	};
 
 	return (
