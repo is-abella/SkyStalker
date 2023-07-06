@@ -212,10 +212,12 @@ async function findCheapestFlights(flightInfo) {
 			return array;
 		});
 		await browser.close();
-		console.log(data);
 		return data;
 	}
-	puppetScrape();
+
+	const data = await puppetScrape();
+	console.log(data);
+	return data;
 }
 
 export { findCheapestFlights };
