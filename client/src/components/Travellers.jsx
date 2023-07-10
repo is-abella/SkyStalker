@@ -110,7 +110,7 @@ function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddl
 							{options.infants > 0 && (
 								<RemoveIcon
 									className="optionCounterButton"
-									onClick={() => handleOption("todinfantsdlers", "d")}
+									onClick={() => handleOption("infants", "d")}
 								/>
 							)}
 							<span className="optionCounterNumber">{options.infants}</span>
