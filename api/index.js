@@ -2,7 +2,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { findCheapestFlights } from "./webscrapping.js";
+import { findCheapestFlights } from "./searchFlights.js";
 
 const app = express();
 app.use(bodyParser.json());
