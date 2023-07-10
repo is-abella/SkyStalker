@@ -13,6 +13,12 @@ function CabinClass({ cabinClassOptions, selectedCabinClass, setCabinClass }) {
 				name="cabin-class"
 				options={cabinClassOptions}
 				onChange={(inputValue) => setCabinClass(inputValue.value)}
+				styles={{
+					control: (baseStyles, state) => ({
+						...baseStyles,
+						border: state.isSelected ? "black" : "none",
+					}),
+				}}
 			/>
 		</div>
 	);
