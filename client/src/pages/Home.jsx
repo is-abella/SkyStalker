@@ -7,6 +7,7 @@ import DepartDate from "../components/DepartDate";
 import ReturnDate from "../components/ReturnDate";
 import CabinClass from "../components/CabinClass";
 import Travellers from "../components/Travellers";
+import TripWay from "../components/TripWay";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -17,13 +18,13 @@ function Home() {
 	const [returnDate, setReturnDate] = useState(new Date());
 	const [travellers, setTravellers] = useState(1);
 	const [cabinClass, setCabinClass] = useState("Economy");
+	const [tripWay, setTripWay] = useState("Return");
 	//only for webscrapping part
 	const [adults, setAdults] = useState(1);
 	const [youths, setYouths] = useState(0);
 	const [children, setChildren] = useState(0);
 	const [toddlers, setToddlers] = useState(0);
 	const [infants, setInfants] = useState(0);
-	const TripWay = "One-way"; //no selection function for one-way/return yet
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
@@ -32,8 +33,12 @@ function Home() {
 		{ value: "First", label: "First" },
 	];
 
+	const tripWayOptions = [
+		{ value: "One-way", label: "One-way" },
+		{ value: "Return", label: "Return" },
+	];
+
 	const handleSearch = () => {
-		console.log("Search clicked");
 		// Prepare the request body
 		const departDateString = departDate.toLocaleDateString("en-GB");
 		const returnDateString = returnDate.toLocaleDateString("en-GB");
@@ -49,7 +54,7 @@ function Home() {
 			children,
 			toddlers,
 			infants,
-			TripWay,
+			tripWay,
 		};
 		// Make a POST request to the backend endpoint
 		fetch("http://localhost:3000/search", {
@@ -87,33 +92,52 @@ function Home() {
 	return (
 		<div>
 			<Header />
-			<div className="flex gap-2 justify-center shrink-0">
-				<SearchFrom
-					placeholder="Country/city/airport code"
-					data={AirportData}
-					setFromInput={setFromInput}
-				/>
-				<SearchTo
-					placeholder="Country/city/airport code"
-					data={AirportData}
-					setToInput={setToInput}
-				/>
-				<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
-				<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
-				<Travellers
-					setTravellers={setTravellers}
-					setAdults={setAdults}
-					setYouths={setYouths}
-					setChildren={setChildren}
-					setToddlers={setToddlers}
-					setInfants={setInfants}
-				/>
-				<CabinClass
-					cabinClassOptions={cabinClassOptions}
-					selectedCabinClass={cabinClass}
-					setCabinClass={setCabinClass}
-				/>
-				<button onClick={handleSearch}>Search</button>
+			<div className="flex flex-col gap-2 justify-center shrink-0">
+				<div className="row-1 flex justify-center gap-2">
+					<TripWay
+						tripWayOptions={tripWayOptions}
+						selectedTripWay={tripWay}
+						setTripWay={setTripWay}
+					/>
+					<Travellers
+						setTravellers={setTravellers}
+						setAdults={setAdults}
+						setYouths={setYouths}
+						setChildren={setChildren}
+						setToddlers={setToddlers}
+						setInfants={setInfants}
+					/>
+					<CabinClass
+						cabinClassOptions={cabinClassOptions}
+						selectedCabinClass={cabinClass}
+						setCabinClass={setCabinClass}
+					/>
+				</div>
+				<div className="row-2 flex justify-center gap-2">
+					<SearchFrom
+						placeholder="Country/city/airport code"
+						data={AirportData}
+						setFromInput={setFromInput}
+					/>
+					<SearchTo
+						placeholder="Country/city/airport code"
+						data={AirportData}
+						setToInput={setToInput}
+					/>
+					<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
+					{tripWay === "Return" && (
+						<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
+					)}
+					<div className="flex flex-col">
+						<div className="label text-white">Search</div>
+						<button
+							type="button"
+							class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-md text-sm px-5 py-2.5"
+							onClick={handleSearch}>
+							Search
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
