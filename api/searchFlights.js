@@ -277,5 +277,4 @@ async function findCheapestFlights(flightInfo) {
 	console.log(datas);
 	return datas;
 }
-findCheapestFlights(sampleInputs);
 export { findCheapestFlights };
