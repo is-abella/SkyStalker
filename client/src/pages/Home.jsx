@@ -19,7 +19,6 @@ function Home() {
 	const [travellers, setTravellers] = useState(1);
 	const [cabinClass, setCabinClass] = useState("Economy");
 	const [tripWay, setTripWay] = useState("Return");
-	//only for webscrapping part
 	const [adults, setAdults] = useState(1);
 	const [youths, setYouths] = useState(0);
 	const [children, setChildren] = useState(0);
@@ -39,7 +38,6 @@ function Home() {
 	];
 
 	const handleSearch = () => {
-		// Prepare the request body
 		const departDateString = departDate.toLocaleDateString("en-GB");
 		const returnDateString = returnDate.toLocaleDateString("en-GB");
 		const requestBody = {
@@ -56,6 +54,7 @@ function Home() {
 			infants,
 			tripWay,
 		};
+		console.log("requestBody", requestBody);
 		// Make a POST request to the backend endpoint
 		fetch("http://localhost:3000/search", {
 			method: "POST",
@@ -79,12 +78,12 @@ function Home() {
 						children: children,
 						toddlers: toddlers,
 						infants: infants,
+						tripWay: tripWay,
 						flightData,
 					},
 				});
 			})
 			.catch((error) => {
-				// Handle any errors that occurred during the request
 				console.error(error);
 			});
 	};
