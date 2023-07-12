@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import "./Results.css";
 
 function Results() {
 	const location = useLocation();
@@ -15,17 +16,23 @@ function Results() {
 	}/${returnDate.getFullYear()}`;
 	const travellers = location.state?.travellers || 1;
 	const cabinClass = location.state?.cabinClass || "Economy";
-	const flightData = location.state?.flightData || {};
+	const tripWay = location.state?.tripWay || "One-way";
+	const flightData = location.state?.flightData || [];
 
 	return (
-		<div>
-			<h1>Results</h1>
-			<div>From: {fromInput}</div>
-			<div>To: {toInput}</div>
-			<div>Depart: {formatDepartDate}</div>
-			<div>Return: {formatReturnDate}</div>
-			<div>Travellers: {travellers}</div>
-			<div>Cabin class: {cabinClass}</div>
+		<div className="results">
+			<div className="side">
+				<h1>Your search</h1>
+				<div className="inputs">
+					<div>
+						{fromInput} - {toInput}
+					</div>
+					<div>Depart: {formatDepartDate}</div>
+					{tripWay === "Return" && <div>Return: {formatReturnDate}</div>}
+					<div>Travellers: {travellers}</div>
+					<div>Cabin class: {cabinClass}</div>
+				</div>
+			</div>
 			<pre>{JSON.stringify(flightData, null, 2)}</pre>
 		</div>
 	);
