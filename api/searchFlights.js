@@ -4,10 +4,10 @@ import puppeteer from "puppeteer";
 //TEST
 const sampleInputs = {
 	fromInput: "SIN",
-	toInput: "LAX",
+	toInput: "PEN",
 	departDate: "29/07/2023", //Format as DDMMYYYY, departure only
 	returnDate: "08/08/2023",
-	cabinClass: "First", //Format as "Economy", "Premium Economy", "Business" and "First"
+	cabinClass: "Economy", //Format as "Economy", "Premium Economy", "Business" and "First"
 	tripWay: "Return", //Format as "One-way" or "Return"
 	adults: 1,
 	toddlers: 2,
@@ -277,5 +277,5 @@ async function findCheapestFlights(flightInfo) {
 	console.log(datas);
 	return datas;
 }
-
+findCheapestFlights(sampleInputs);
 export { findCheapestFlights };
