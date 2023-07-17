@@ -1,6 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 import "./Results.css";
+import htmlConverter from "./htmlConverter.js";
 
 function Results() {
 	const location = useLocation();
@@ -17,7 +19,8 @@ function Results() {
 	const travellers = location.state?.travellers || 1;
 	const cabinClass = location.state?.cabinClass || "Economy";
 	const tripWay = location.state?.tripWay || "One-way";
-	const flightData = location.state?.flightData || [];
+	const flightData = location.state?.flightData || []; 
+	const htmlString = htmlConverter(flightData, fromInput, toInput, tripWay, travellers, cabinClass);
 
 	return (
 		<div className="results">
@@ -33,7 +36,8 @@ function Results() {
 					<div>Cabin class: {cabinClass}</div>
 				</div>
 			</div>
-			<pre>{JSON.stringify(flightData, null, 2)}</pre>
+			<div className="flight-results">{ReactHtmlParser(htmlString)}</div>
+			{/*<pre>{JSON.stringify(flightData, null, 2)}</pre>*/}
 		</div>
 	);
 }

@@ -4,8 +4,8 @@ import puppeteer from "puppeteer";
 //TEST
 const sampleInputs = {
 	fromInput: "SIN",
-	toInput: "PEN",
-	departDate: "29/07/2023", //Format as DDMMYYYY, departure only
+	toInput: "SHA",
+	departDate: "26/07/2023", //Format as DDMMYYYY, departure only
 	returnDate: "08/08/2023",
 	cabinClass: "Economy", //Format as "Economy", "Premium Economy", "Business" and "First"
 	tripWay: "Return", //Format as "One-way" or "Return"
@@ -16,6 +16,21 @@ const sampleInputs = {
 	youths: 1,
 	customerEmail: "demeterrxy@gmail.com",
 };
+
+const sampleInputs2 = {
+	fromInput: 'SIN',
+	toInput: 'SHA',
+	departDate: '26/07/2023',
+	returnDate: '13/07/2023',
+	travellers: 1,
+	cabinClass: 'Economy',
+	adults: 1,
+	youths: 0,
+	children: 0,
+	toddlers: 0,
+	infants: 0,
+	tripWay: 'One-way'
+}
 
 async function findCheapestFlights(flightInfo) {
 	const driver = await new Builder().forBrowser("chrome").build();
@@ -31,6 +46,7 @@ async function findCheapestFlights(flightInfo) {
 	const infantCount = flightInfo.infants;
 	const childCount = flightInfo.children;
 	const youthCount = flightInfo.youths;
+	const travelNo = flightInfo.travellers;
 
 	await driver.get("https://www.kayak.sg/flights");
 	await driver.sleep(3000);
@@ -74,6 +90,7 @@ async function findCheapestFlights(flightInfo) {
 	}
 
 	//close
+	await driver.sleep(5000);
 	await driver.wait(until.elementIsVisible(driver.findElement(By.id("popover"))));
 	await driver.actions().sendKeys(Key.ESCAPE).perform();
 
@@ -277,4 +294,5 @@ async function findCheapestFlights(flightInfo) {
 	console.log(datas);
 	return datas;
 }
+
 export { findCheapestFlights };
