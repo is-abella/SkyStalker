@@ -3,15 +3,24 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DepartDate.css";
 
-function DepartDate() {
-	const [startDate, setStartDate] = useState(new Date());
+function DepartDate({ setDepartDate, minDate }) {
+	const [departDate, setLocalDepartDate] = useState(new Date());
+
+	const updateDate = (date) => {
+		setLocalDepartDate(date);
+		setDepartDate(date);
+	};
+
 	return (
 		<div className="flex flex-col">
 			<div className="label">Depart</div>
 			<DatePicker
-				selected={startDate}
-				onChange={(date) => setStartDate(date)}
+				selected={departDate}
+				onChange={(date) => updateDate(date)}
 				isClearable
+				minDate={minDate}
+				value={departDate}
+				autoComplete="off"
 				id="datepicker"
 				dateFormat="dd/MM/yyyy"
 				placeholderText="Add departure date"

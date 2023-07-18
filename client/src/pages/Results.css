@@ -1,0 +1,59 @@
+.results,
+.side,
+.results-main,
+.going,
+.return,
+.option,
+.left {
+	display: flex;
+}
+
+.results {
+	justify-content: space-evenly;
+	margin: 40px;
+}
+
+.side {
+	height: fit-content;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.inputs {
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	padding: 40px;
+}
+
+.option {
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	padding: 40px;
+	width: 800px;
+}
+
+.results-main {
+	flex-direction: column;
+	gap: 10px;
+}
+
+.option {
+	justify-content: space-between;
+}
+
+.going,
+.return {
+	gap: 180px;
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+}
+
+.right {
+	flex-direction: column;
+}
+
+.left {
+	flex-direction: column;
+	gap: 10px;
+}
