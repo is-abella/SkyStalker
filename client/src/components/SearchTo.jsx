@@ -45,7 +45,7 @@ function SearchTo({ placeholder, data, setToInput }) {
 	return (
 		<div className="searchto">
 			<label for="to" className="label">
-				To
+				TO
 			</label>
 			<div className="searchbar">
 				<input

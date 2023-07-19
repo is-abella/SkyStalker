@@ -46,7 +46,7 @@ function SearchFrom({ placeholder, data, setFromInput }) {
 	return (
 		<div className="searchfrom">
 			<label htmlFor="from" className="label">
-				From
+				FROM
 			</label>
 			<div className="searchbar">
 				<input

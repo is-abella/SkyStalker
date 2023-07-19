@@ -13,7 +13,7 @@ function DepartDate({ setDepartDate, minDate }) {
 
 	return (
 		<div className="flex flex-col">
-			<div className="label">Depart</div>
+			<div className="label">DEPARTURE DATE</div>
 			<DatePicker
 				selected={departDate}
 				onChange={(date) => updateDate(date)}

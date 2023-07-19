@@ -13,7 +13,7 @@ function ReturnDate({ setReturnDate, minDate }) {
 
 	return (
 		<div className="flex flex-col">
-			<div className="label">Return</div>
+			<div className="label">RETURN DATE</div>
 			<DatePicker
 				selected={returnDate}
 				onChange={(date) => updateDate(date)}

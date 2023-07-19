@@ -5,7 +5,7 @@ import "./CabinClass.css";
 function CabinClass({ cabinClassOptions, selectedCabinClass, setCabinClass }) {
 	return (
 		<div>
-			<div className="label">Cabin Class</div>
+			<div className="label">CABIN CLASS</div>
 			<Select
 				className="basic-single"
 				classNamePrefix="select"

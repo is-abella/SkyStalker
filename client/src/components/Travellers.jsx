@@ -34,7 +34,7 @@ function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddl
 
 	return (
 		<div className="travellers">
-			<div className="label">Travellers</div>
+			<div className="label">TRAVELLERS</div>
 			<span onClick={() => setOpenOptions(!openOptions)} className="searchbar">
 				{travellersSum > 1 ? `${travellersSum} travellers` : `${options.adult} adult`}
 			</span>

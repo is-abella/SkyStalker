@@ -4,7 +4,7 @@ import Select from "react-select";
 function TripWay({ tripWayOptions, selectedTripWay, setTripWay }) {
 	return (
 		<div>
-			<div className="label">Trip type</div>
+			<div className="label">TRIP TYPE</div>
 			<Select
 				className="basic-single"
 				classNamePrefix="select"
