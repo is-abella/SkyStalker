@@ -37,6 +37,14 @@ function Home() {
 		{ value: "Return", label: "Return" },
 	];
 
+	const styles = {
+		height: "50vh",
+		backgroundImage: 'url("/images/background.png")',
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+	};
+
 	const handleSearch = () => {
 		const departDateString = departDate.toLocaleDateString("en-GB");
 		const returnDateString = returnDate.toLocaleDateString("en-GB");
@@ -90,9 +98,11 @@ function Home() {
 
 	return (
 		<div>
-			<Header />
+			<div style={styles} className="m-2">
+				<Header />
+			</div>
 			<div className="flex flex-col gap-2 justify-center shrink-0">
-				<div className="row-1 flex justify-center gap-2">
+				<div className="row-1 flex gap-2 justify-center">
 					<TripWay
 						tripWayOptions={tripWayOptions}
 						selectedTripWay={tripWay}
@@ -112,7 +122,7 @@ function Home() {
 						setCabinClass={setCabinClass}
 					/>
 				</div>
-				<div className="row-2 flex justify-center gap-2">
+				<div className="row-2 flex gap-2 justify-center">
 					<SearchFrom
 						placeholder="Country/city/airport code"
 						data={AirportData}
@@ -133,7 +143,7 @@ function Home() {
 							type="button"
 							class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-md text-sm px-5 py-2.5"
 							onClick={handleSearch}>
-							Search
+							DISPLAY FLIGHTS
 						</button>
 					</div>
 				</div>

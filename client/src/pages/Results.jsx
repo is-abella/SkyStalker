@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import "./Results.css";
 import htmlConverter from "./htmlConverter.js";
+import Header from "../components/Header";
 
 function Results() {
 	const location = useLocation();
@@ -19,12 +20,20 @@ function Results() {
 	const travellers = location.state?.travellers || 1;
 	const cabinClass = location.state?.cabinClass || "Economy";
 	const tripWay = location.state?.tripWay || "One-way";
-	const flightData = location.state?.flightData || []; 
-	const htmlString = htmlConverter(flightData, fromInput, toInput, tripWay, travellers, cabinClass);
+	const flightData = location.state?.flightData || [];
+	const htmlString = htmlConverter(
+		flightData,
+		fromInput,
+		toInput,
+		tripWay,
+		travellers,
+		cabinClass
+	);
 
 	return (
 		<div className="results">
 			<div className="side">
+				<Header />
 				<h1>Your search</h1>
 				<div className="inputs">
 					<div>
