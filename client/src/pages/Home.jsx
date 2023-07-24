@@ -9,6 +9,7 @@ import CabinClass from "../components/CabinClass";
 import Travellers from "../components/Travellers";
 import TripWay from "../components/TripWay";
 import { useNavigate } from "react-router-dom";
+import "./home.css";
 
 function Home() {
 	const navigate = useNavigate();
@@ -37,13 +38,27 @@ function Home() {
 		{ value: "Return", label: "Return" },
 	];
 
-	const styles = {
-		height: "50vh",
-		backgroundImage: 'url("/images/background.png")',
-		backgroundSize: "cover",
-		backgroundRepeat: "no-repeat",
-		backgroundPosition: "center",
-	};
+	const styleBlock = `
+		<style>
+		.search {
+			background-color: rgb(192, 191, 251);
+			color: black;
+			border: none;
+			height: 36px;
+			width: 170px;
+			border-radius: 10px;
+			font-weight: bold;
+			cursor: pointer;
+			margin-right: 8px;
+			letter-spacing: 1px;
+			margin-top: 20px;
+		}
+
+		.search:hover {
+			background-color: rgba(208, 186, 248, 0.617);
+		}
+		</style>
+  `;
 
 	const handleSearch = () => {
 		const departDateString = departDate.toLocaleDateString("en-GB");
@@ -97,12 +112,11 @@ function Home() {
 	};
 
 	return (
-		<div>
-			<div style={styles} className="m-2">
-				<Header />
-			</div>
+		<div className="home-background">
+			<Header />
+			<div dangerouslySetInnerHTML={{ __html: styleBlock }} />
 			<div className="flex flex-col gap-2 justify-center shrink-0">
-				<div className="row-1 flex gap-2 justify-center">
+				<div className="row-1 flex justify-center gap-2">
 					<TripWay
 						tripWayOptions={tripWayOptions}
 						selectedTripWay={tripWay}
@@ -122,7 +136,7 @@ function Home() {
 						setCabinClass={setCabinClass}
 					/>
 				</div>
-				<div className="row-2 flex gap-2 justify-center">
+				<div className="row-2 flex justify-center gap-2">
 					<SearchFrom
 						placeholder="Country/city/airport code"
 						data={AirportData}
@@ -138,15 +152,18 @@ function Home() {
 						<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
 					)}
 					<div className="flex flex-col">
-						<div className="label text-white">Search</div>
 						<button
-							type="button"
-							class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-md text-sm px-5 py-2.5"
-							onClick={handleSearch}>
-							DISPLAY FLIGHTS
+							className="search" // Add a class for the button
+							onClick={handleSearch}
+							>Search
 						</button>
 					</div>
 				</div>
+			</div>
+			<div className="overlay-container">
+				<div className="overlay-image">
+					<img src="../images/overlay.jpeg" alt="Overlay" />
+  				</div>
 			</div>
 		</div>
 	);
