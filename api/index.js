@@ -11,13 +11,12 @@ app.use(cors());
 app.post("/search", (req, res) => {
 	try {
 		const userInput = req.body;
-		console.log("index.js:", userInput);
 		findCheapestFlights(userInput)
 			.then((flightData) => {
 				//const htmlString = htmlConverter(flightData, userInput.fromInput, userInput.toInput, userInput.tripWay, userInput.travellers, userInput.cabinClass);
 				//res.send(htmlString);
+				console.log(flightData);
 				res.json(flightData);
-				console.log("findcheapflights ran");
 			})
 			.catch((error) => {
 				console.error(error);
