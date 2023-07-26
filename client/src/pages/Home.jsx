@@ -10,6 +10,7 @@ import Travellers from "../components/Travellers";
 import TripWay from "../components/TripWay";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
+//import "./Loading";
 
 function Home() {
 	const navigate = useNavigate();
@@ -25,6 +26,7 @@ function Home() {
 	const [children, setChildren] = useState(0);
 	const [toddlers, setToddlers] = useState(0);
 	const [infants, setInfants] = useState(0);
+	//const [isLoading, setIsLoading] = useState(false); //added
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
@@ -38,27 +40,14 @@ function Home() {
 		{ value: "Return", label: "Return" },
 	];
 
-	const styleBlock = `
-		<style>
-		.search {
-			background-color: rgb(192, 191, 251);
-			color: black;
-			border: none;
-			height: 36px;
-			width: 170px;
-			border-radius: 10px;
-			font-weight: bold;
-			cursor: pointer;
-			margin-right: 8px;
-			letter-spacing: 1px;
-			margin-top: 20px;
-		}
-
-		.search:hover {
-			background-color: rgba(208, 186, 248, 0.617);
-		}
-		</style>
-  `;
+	const styles = {
+		height: "42vh",
+		backgroundImage: `linear-gradient( rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 10) 99%), url("/images/background.png")`,
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+		zIndex: "1",
+	};
 
 	const handleSearch = () => {
 		const departDateString = departDate.toLocaleDateString("en-GB");
@@ -78,6 +67,7 @@ function Home() {
 			tripWay,
 		};
 		console.log("requestBody", requestBody);
+		//setIsLoading(true); //added
 		// Make a POST request to the backend endpoint
 		fetch("http://localhost:3000/search", {
 			method: "POST",
@@ -88,6 +78,7 @@ function Home() {
 		})
 			.then((response) => response.json())
 			.then((flightData) => {
+				//setIsLoading(false); //added
 				navigate("/results", {
 					state: {
 						fromInput: fromInput,
@@ -108,15 +99,40 @@ function Home() {
 			})
 			.catch((error) => {
 				console.error(error);
+				setIsLoading(false);
 			});
 	};
 
+	const styleBlock = `
+	<style>
+	.search {
+		background-color: rgb(192, 191, 251);
+		color: black;
+		border: none;
+		height: 36px;
+		width: 170px;
+		border-radius: 10px;
+		font-weight: bold;
+		cursor: pointer;
+		margin-right: 8px;
+		letter-spacing: 1px;
+	}
+
+	.search:hover {
+		background-color: rgba(208, 186, 248, 0.617);
+	}
+
+	</style>
+`;
+
 	return (
 		<div className="home-background">
-			<Header />
+			<div style={styles}>
+				<Header />
+			</div>
 			<div dangerouslySetInnerHTML={{ __html: styleBlock }} />
 			<div className="flex flex-col gap-2 justify-center shrink-0">
-				<div className="row-1 flex justify-center gap-2">
+				<div className="row-1 flex gap-2 justify-center">
 					<TripWay
 						tripWayOptions={tripWayOptions}
 						selectedTripWay={tripWay}
@@ -136,7 +152,7 @@ function Home() {
 						setCabinClass={setCabinClass}
 					/>
 				</div>
-				<div className="row-2 flex justify-center gap-2">
+				<div className="row-2 flex gap-2 justify-center">
 					<SearchFrom
 						placeholder="Country/city/airport code"
 						data={AirportData}
@@ -152,19 +168,19 @@ function Home() {
 						<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
 					)}
 					<div className="flex flex-col">
+						<div className="label text-white">Search</div>
 						<button
-							className="search" // Add a class for the button
-							onClick={handleSearch}
-							>Search
+							//type="button"
+							className="search"
+							onClick={handleSearch}>
+							DISPLAY FLIGHTS
 						</button>
 					</div>
 				</div>
 			</div>
-			<div className="overlay-container">
-				<div className="overlay-image">
-					<img src="../images/overlay.jpeg" alt="Overlay" />
-  				</div>
-			</div>
+			<div className="blue-image" />
+			{/* Show the Loading component if isLoading is true */}
+			{/*isLoading && <Loading />*/}
 		</div>
 	);
 }

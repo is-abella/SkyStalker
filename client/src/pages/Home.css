@@ -1,33 +1,15 @@
-
-/* home.css */
-.home-background {
-  background-image: url("../images/blue.png");
-  background-size: 100%;
-  min-height: 100vh;
-  position: relative;
+.blue-image {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50%; /* Adjust the height to control the bottom half */
+	background-image: linear-gradient(
+			to bottom,
+			rgba(255, 255, 255, 10) 20%,
+			rgba(107, 140, 164, 0.8) 100%
+		),
+		url("../images/blue.png");
+	background-size: cover;
+	z-index: -1; /* Set a lower z-index to keep it below the components */
 }
-
-.overlay-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70%; 
-  z-index: 1;
-  border-top: 20px solid white; 
-  border-left: 20px solid transparent; 
-  border-right: 20px solid transparent;
-}
-
-.overlay-image::before {
-  content: "";
-}
-
-.overlay-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.65;
-}
-
-  

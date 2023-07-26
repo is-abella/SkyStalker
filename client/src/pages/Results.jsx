@@ -30,23 +30,59 @@ function Results() {
 		cabinClass
 	);
 
+	const styles = {
+		height: "42vh",
+		backgroundImage: `linear-gradient( rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 10) 99%), url("/images/background.png")`,
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+		zIndex: "1",
+	};
+
+	const styleBlock = `
+	<style>
+	.search {
+		background-color: rgb(192, 191, 251);
+		color: black;
+		border: none;
+		height: 36px;
+		width: 170px;
+		border-radius: 10px;
+		font-weight: bold;
+		cursor: pointer;
+		margin-right: 8px;
+		letter-spacing: 1px;
+	}
+
+	.search:hover {
+		background-color: rgba(208, 186, 248, 0.617);
+	}
+
+	</style>
+`;
+
 	return (
-		<div className="results">
-			<div className="side">
-				<Header />
-				<h1>Your search</h1>
-				<div className="inputs">
-					<div>
-						{fromInput} - {toInput}
+		<div className="results-container">
+			<div className="results" style={styles}>
+				<div dangerouslySetInnerHTML={{ __html: styleBlock }} />
+				<div className="side">
+					<Header />
+					<div className="inputs">
+						<h1>
+							<strong>Your search</strong>
+						</h1>
+						<div>
+							{fromInput} - {toInput}
+						</div>
+						<div>Depart: {formatDepartDate}</div>
+						{tripWay === "Return" && <div>Return: {formatReturnDate}</div>}
+						<div>Travellers: {travellers}</div>
+						<div>Cabin class: {cabinClass}</div>
 					</div>
-					<div>Depart: {formatDepartDate}</div>
-					{tripWay === "Return" && <div>Return: {formatReturnDate}</div>}
-					<div>Travellers: {travellers}</div>
-					<div>Cabin class: {cabinClass}</div>
 				</div>
+				<div className="flight-results">{ReactHtmlParser(htmlString)}</div>
 			</div>
-			<div className="flight-results">{ReactHtmlParser(htmlString)}</div>
-			{/*<pre>{JSON.stringify(flightData, null, 2)}</pre>*/}
+			<div className="blue-image" />
 		</div>
 	);
 }
