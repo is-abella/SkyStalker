@@ -21,7 +21,7 @@ function ReturnDate({ setReturnDate, minDate }) {
 				value={returnDate}
 				minDate={minDate}
 				autoComplete="off"
-				id="datepicker"
+				id="datepicker-return"
 				dateFormat="dd/MM/yyyy"
 				placeholderText="Add return date"
 			/>

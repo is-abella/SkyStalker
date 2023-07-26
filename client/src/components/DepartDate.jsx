@@ -21,7 +21,7 @@ function DepartDate({ setDepartDate, minDate }) {
 				minDate={minDate}
 				value={departDate}
 				autoComplete="off"
-				id="datepicker"
+				id="datepicker-depart"
 				dateFormat="dd/MM/yyyy"
 				placeholderText="Add departure date"
 			/>
