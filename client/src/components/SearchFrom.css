@@ -32,6 +32,10 @@
 	height: 200px;
 	overflow: hidden;
 	overflow-y: auto;
+	background-color: white;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
 .dataresults::-webkit-scrollbar {
@@ -47,4 +51,8 @@
 
 .dataitem:hover {
 	background-color: lightgray;
+}
+
+.text {
+	background: transparent;
 }
