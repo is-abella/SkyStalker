@@ -10,7 +10,7 @@ import Travellers from "../components/Travellers";
 import TripWay from "../components/TripWay";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
-//import "./Loading";
+//import BeatLoader from "react-spinners/BeatLoader";
 
 function Home() {
 	const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Home() {
 	const [children, setChildren] = useState(0);
 	const [toddlers, setToddlers] = useState(0);
 	const [infants, setInfants] = useState(0);
-	//const [isLoading, setIsLoading] = useState(false); //added
+	const [loading, setLoading] = useState(false);
 
 	const cabinClassOptions = [
 		{ value: "Economy", label: "Economy" },
@@ -50,6 +50,8 @@ function Home() {
 	};
 
 	const handleSearch = () => {
+		setLoading(true);
+
 		const departDateString = departDate.toLocaleDateString("en-GB");
 		const returnDateString = returnDate.toLocaleDateString("en-GB");
 		const requestBody = {
@@ -67,7 +69,6 @@ function Home() {
 			tripWay,
 		};
 		console.log("requestBody", requestBody);
-		//setIsLoading(true); //added
 		// Make a POST request to the backend endpoint
 		fetch("http://localhost:3000/search", {
 			method: "POST",
@@ -78,7 +79,7 @@ function Home() {
 		})
 			.then((response) => response.json())
 			.then((flightData) => {
-				//setIsLoading(false); //added
+				setLoading(false);
 				navigate("/results", {
 					state: {
 						fromInput: fromInput,
@@ -99,7 +100,7 @@ function Home() {
 			})
 			.catch((error) => {
 				console.error(error);
-				setIsLoading(false);
+				setLoading(false);
 			});
 	};
 
@@ -132,55 +133,64 @@ function Home() {
 			</div>
 			<div dangerouslySetInnerHTML={{ __html: styleBlock }} />
 			<div className="flex flex-col gap-2 justify-center shrink-0">
-				<div className="row-1 flex gap-2 justify-center">
-					<TripWay
-						tripWayOptions={tripWayOptions}
-						selectedTripWay={tripWay}
-						setTripWay={setTripWay}
-					/>
-					<Travellers
-						setTravellers={setTravellers}
-						setAdults={setAdults}
-						setYouths={setYouths}
-						setChildren={setChildren}
-						setToddlers={setToddlers}
-						setInfants={setInfants}
-					/>
-					<CabinClass
-						cabinClassOptions={cabinClassOptions}
-						selectedCabinClass={cabinClass}
-						setCabinClass={setCabinClass}
-					/>
-				</div>
-				<div className="row-2 flex gap-2 justify-center">
-					<SearchFrom
-						placeholder="Country/city/airport code"
-						data={AirportData}
-						setFromInput={setFromInput}
-					/>
-					<SearchTo
-						placeholder="Country/city/airport code"
-						data={AirportData}
-						setToInput={setToInput}
-					/>
-					<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
-					{tripWay === "Return" && (
-						<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
-					)}
-					<div className="flex flex-col">
-						<div className="label text-white">Search</div>
-						<button
-							//type="button"
-							className="search"
-							onClick={handleSearch}>
-							DISPLAY FLIGHTS
-						</button>
+				{loading ? (
+					<div className="loading">
+						Hang on tight while we're fetching your flights!
+						{/*<BeatLoader
+							loading={loading}
+							color={"#d0baf89d"}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+				/>*/}
 					</div>
-				</div>
+				) : (
+					<>
+						<div className="row-1 flex gap-2 justify-center">
+							<TripWay
+								tripWayOptions={tripWayOptions}
+								selectedTripWay={tripWay}
+								setTripWay={setTripWay}
+							/>
+							<Travellers
+								setTravellers={setTravellers}
+								setAdults={setAdults}
+								setYouths={setYouths}
+								setChildren={setChildren}
+								setToddlers={setToddlers}
+								setInfants={setInfants}
+							/>
+							<CabinClass
+								cabinClassOptions={cabinClassOptions}
+								selectedCabinClass={cabinClass}
+								setCabinClass={setCabinClass}
+							/>
+						</div>
+						<div className="row-2 flex gap-2 justify-center">
+							<SearchFrom
+								placeholder="Country/city/airport code"
+								data={AirportData}
+								setFromInput={setFromInput}
+							/>
+							<SearchTo
+								placeholder="Country/city/airport code"
+								data={AirportData}
+								setToInput={setToInput}
+							/>
+							<DepartDate setDepartDate={setDepartDate} minDate={new Date()} />
+							{tripWay === "Return" && (
+								<ReturnDate setReturnDate={setReturnDate} minDate={departDate} />
+							)}
+							<div className="flex flex-col">
+								<div className="label text-white">Search</div>
+								<button className="search" onClick={handleSearch}>
+									DISPLAY FLIGHTS
+								</button>
+							</div>
+						</div>
+					</>
+				)}
 			</div>
 			<div className="blue-image" />
-			{/* Show the Loading component if isLoading is true */}
-			{/*isLoading && <Loading />*/}
 		</div>
 	);
 }
