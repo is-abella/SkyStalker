@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Travellers.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -13,6 +13,7 @@ function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddl
 		infants: 0,
 	});
 	const travellersSum = Object.values(options).reduce((a, b) => a + b, 0);
+	const optionsRef = useRef();
 
 	useEffect(() => {
 		setTravellers(travellersSum);
@@ -22,6 +23,19 @@ function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddl
 		setToddlers(options.toddlers);
 		setInfants(options.infants);
 	}, [options, setTravellers, setAdults, setYouths, setChildren, setToddlers, setInfants]);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+				setOpenOptions(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const handleOption = (name, operation) => {
 		setOptions((prev) => {
@@ -33,7 +47,7 @@ function Travellers({ setTravellers, setAdults, setYouths, setChildren, setToddl
 	};
 
 	return (
-		<div className="travellers">
+		<div className="travellers" ref={optionsRef}>
 			<div className="label">TRAVELLERS</div>
 			<span onClick={() => setOpenOptions(!openOptions)} className="searchbar">
 				{travellersSum > 1 ? `${travellersSum} travellers` : `${options.adult} adult`}
