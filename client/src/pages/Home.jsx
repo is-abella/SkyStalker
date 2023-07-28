@@ -10,7 +10,7 @@ import Travellers from "../components/Travellers";
 import TripWay from "../components/TripWay";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
-//import BeatLoader from "react-spinners/BeatLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function Home() {
 	const navigate = useNavigate();
@@ -135,13 +135,13 @@ function Home() {
 			<div className="flex flex-col gap-2 justify-center shrink-0">
 				{loading ? (
 					<div className="loading">
-						Hang on tight while we're fetching your flights!
-						{/*<BeatLoader
+						<div>Hang on tight while we're fetching your flights!</div>
+						<BeatLoader
 							loading={loading}
-							color={"#d0baf89d"}
+							color={"#c0bffb"}
 							aria-label="Loading Spinner"
 							data-testid="loader"
-				/>*/}
+						/>
 					</div>
 				) : (
 					<>
