@@ -131,7 +131,6 @@ async function findCheapestFlights(flightInfo) {
   await driver.wait(until.elementLocated(By.xpath(prevMonth)), 5000).click();
   
   //LOOP
-  //Perhaps can have invalid date error if date entered < today's date
   let departingDateElement = '';
 
   while (departingDateElement === '') {
@@ -178,13 +177,14 @@ async function findCheapestFlights(flightInfo) {
 
   //SWITCH TO NEW TAB
   const handles = await driver.getAllWindowHandles();
-  await driver.sleep(1000);
+  await driver.sleep(5000);
   await driver.switchTo().window(handles[1]);
 
   //PRESS CHEAPEST
+  await driver.sleep(2000);
   const cheapestButton = '//div[@aria-label="Cheapest"]';
   await driver.wait(until.elementLocated(By.xpath(cheapestButton)), 7000).click();
-  await driver.sleep(1000);
+  await driver.sleep(5000);
   const strUrl = await driver.getCurrentUrl();
 
 
@@ -207,8 +207,8 @@ async function findCheapestFlights(flightInfo) {
       await page.waitForSelector('.vmXl.vmXl-mod-variant-default');
       await page.waitForSelector('.f8F1-price-text');
   
-      const data = await page.evaluate(function(flightWay) {
-          const flights = document.querySelectorAll('.nrc6'); 
+      const data = await page.$$eval('.nrc6', (flights, flightWay) => {
+          //const flights = document.querySelectorAll('.nrc6'); 
           const array = [];
           const counter = flights.length < 5 ? flights.length : 5; 
           for (i=0; i<counter; i++) {    
@@ -246,10 +246,10 @@ async function findCheapestFlights(flightInfo) {
   };
 
   const datas = await puppetScrape(way);
-  //console.log(datas);
+  console.log(datas);
   return datas; 
   
 }
 
 
-export { findCheapestFlights };
+export {findCheapestFlights};
