@@ -1,9 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import ReactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 import "./Results.css";
 import htmlConverter from "./htmlConverter.js";
 import Header from "../components/Header";
+import Email from "../components/Email";
 
 function Results() {
 	const location = useLocation();
@@ -79,8 +80,9 @@ function Results() {
 						<div>Travellers: {travellers}</div>
 						<div>Cabin class: {cabinClass}</div>
 					</div>
+					<Email />
 				</div>
-				<div className="flight-results">{ReactHtmlParser(htmlString)}</div>
+				<div className="flight-results">{parse(htmlString)}</div>
 			</div>
 			<div className="blue-image" />
 		</div>
