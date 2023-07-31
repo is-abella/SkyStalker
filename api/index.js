@@ -1,8 +1,7 @@
-//this is the main file?
 import express from "express";
 import cors from "cors";
 import { findCheapestFlights } from "./searchFlights.js";
-//import htmlConverter from "../client/src/pages/htmlConverter.js";
+import sendEmail from "./email.js";
 
 const app = express();
 app.use(express.json());
@@ -30,4 +29,22 @@ app.post("/search", (req, res) => {
 
 app.listen(3000, () => {
 	console.log("Server is running on port 3000");
+});
+
+app.post("/send-email", (req, res) => {
+	try {
+		const flightData = req.body;
+
+		sendEmail(flightData)
+			.then(() => {
+				res.json({ success: true });
+			})
+			.catch((error) => {
+				console.error(error);
+				res.status(500).json({ error: "An error occurred during email sending" });
+			});
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: "An error occurred during email sending" });
+	}
 });
