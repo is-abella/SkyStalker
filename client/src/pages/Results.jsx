@@ -22,6 +22,12 @@ function Results() {
 	const cabinClass = location.state?.cabinClass || "Economy";
 	const tripWay = location.state?.tripWay || "One-way";
 	const flightData = location.state?.flightData || [];
+	const adults = location.state?.adults;
+	const youths = location.state?.youths;
+	const children = location.state?.children;
+	const toddlers = location.state?.toddlers;
+	const infants = location.state?.infants;
+
 	const htmlString = htmlConverter(
 		flightData,
 		fromInput,
@@ -30,6 +36,21 @@ function Results() {
 		travellers,
 		cabinClass
 	);
+
+	const flightInfo = {
+		fromInput,
+		toInput,
+		departDate: formatDepartDate,
+		returnDate: formatReturnDate,
+		travellers,
+		cabinClass,
+		tripWay,
+		adults,
+		youths,
+		children,
+		infants,
+		toddlers,
+	};
 
 	const styles = {
 		height: "42vh",
@@ -80,7 +101,7 @@ function Results() {
 						<div>Travellers: {travellers}</div>
 						<div>Cabin class: {cabinClass}</div>
 					</div>
-					<Email />
+					<Email flightInfo={flightInfo} />
 				</div>
 				<div className="flight-results">{parse(htmlString)}</div>
 			</div>
