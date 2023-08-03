@@ -2,7 +2,15 @@ import React from "react";
 import "./htmlConverter.css"
 
 function htmlConverter(data, fromInput, toInput, tripWay, travellers, cabinClass) {
-  
+
+  setTimeout(() => {
+    const viewDetailsLinks = document.querySelectorAll(".view-details-button");
+    viewDetailsLinks.forEach((link) => {
+      const flightLink = link.dataset.link;
+      link.addEventListener("click", (event) => openLink(event, flightLink));
+    });
+  }, 0);
+
 	if (tripWay === "One-way") {
     
 		let htmlString = `
@@ -25,12 +33,12 @@ function htmlConverter(data, fromInput, toInput, tripWay, travellers, cabinClass
           </div>
           <div class="right">
             <div class="price"> ${
-				travellers > 1 ? `${flight.price} / person` : `${flight.price}`
+				travellers > 1 ? `${flight.price} / Person` : `${flight.price}`
 			}</div>
             <div class="price">${travellers > 1 ? `S$ ${price * travellers} total` : ""}</div>
             <div className="cabin-class">${cabinClass}</div> 
             <div class="linkDeal">
-              <a href="${flight.link}" target="_blank" class="view-details-button">View Details</a>
+              <a href="${flight.link}" target="_blank" class="view-details-button" >View Details</a>
             </div>          
           </div>
         </div>`;
@@ -67,7 +75,7 @@ function htmlConverter(data, fromInput, toInput, tripWay, travellers, cabinClass
                 </div>
                 <div class="right">
                   <div class="price">${
-						travellers > 1 ? `${flight.price} / person` : `${flight.price}`
+						travellers > 1 ? `${flight.price} / Person` : `${flight.price}`
 					}</div>
                   <div class="price">${travellers > 1 ? `S$ ${price * travellers} total` : ""}</div>
                   <div className="cabin-class">${cabinClass}</div>
@@ -83,5 +91,7 @@ function htmlConverter(data, fromInput, toInput, tripWay, travellers, cabinClass
 		return htmlString;
 	}
 }
+
+
 
 export default htmlConverter;

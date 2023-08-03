@@ -283,6 +283,6 @@ const testing = {
   email:'demeterrxy@gmail.com'
 }
 
-//
+//findCheapestFlights(testing);
 
 export {findCheapestFlights};

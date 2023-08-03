@@ -12,7 +12,7 @@ function generateEmailSubject(drop, leaveFrom, goTo, currentPrice) {
 		return "Welcome to SkyStalker's email alerts!";
 	} else if (drop) {
 		const previousPriceString = `$${previousPrice.toFixed(2)}`;
-		return `Flight from ${leaveFrom} to ${goTo}: ${previousPriceString} ➜ <s>${priceString}</s>`;
+		return `Flight from ${leaveFrom} to ${goTo}: ${previousPriceString} ➜ ${priceString}`;
 	} else {
 		return `Flight from ${leaveFrom} to ${goTo}: cheapest flights currently`;
 	}
@@ -113,6 +113,22 @@ async function sendEmail(sampleInputs) {
 		console.log(error);
 	}
 }
+
+
+function startEmailAlerts(sampleInputs) {
+	const intervalId = setInterval(async () => {
+	  try {
+		await sendEmail(sampleInputs);
+	  } catch (error) {
+		console.log("Error sending email:", error);
+	  }
+	}, 5 * 60 * 60 * 1000); // Sends every 5 minutes
+  
+	setTimeout(() => {
+	  clearInterval(intervalId); // Stop the interval
+	  console.log("Email sending stopped after 42 Hours.");
+	}, 8 * 6 * 60 * 60 * 1000);
+  }
 /*
 const testing = {
     fromInput: 'PEN',
@@ -129,13 +145,13 @@ const testing = {
     tripWay: 'One-way',
     email:'demeterrxy@gmail.com'
 }
-sendEmail(testing);*/
+sendEmail(testing);
 
 const intervalId = setInterval(sendEmail, 5 * 60 * 1000); //sends every 6h
 
 setTimeout(() => {
 	clearInterval(intervalId); // Stop the interval
 	console.log("Email sending stopped after 42 Hours.");
-}, 8 * 6 * 60 * 60 * 1000);
+}, 8 * 6 * 60 * 60 * 1000);*/
 
-export default sendEmail;
+export default startEmailAlerts;
