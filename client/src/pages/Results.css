@@ -41,12 +41,14 @@
 
 .going,
 .return {
-	gap: 120px;
+	gap: 100px;
+	align-items: baseline;
 }
 
 .details {
 	display: flex;
 	flex-direction: column;
+	white-space: nowrap;
 }
 
 .right {
@@ -86,4 +88,22 @@
 .duration,
 .price {
 	font-weight: bold;
+}
+
+.going .details,
+.return .details {
+  flex: 1;
+}
+
+.going .stops,
+.return .stops,
+.going .duration,
+.return .duration {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.going .time,
+.return .time {
+  min-width: 150px;
 }
