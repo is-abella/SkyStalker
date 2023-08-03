@@ -31,12 +31,15 @@ app.listen(3000, () => {
 	console.log("Server is running on port 3000");
 });
 
+
+
 app.post("/send-email", (req, res) => {
 	try {
 		const flightData = req.body;
-
+		//console.log(flightData)
 		sendEmail(flightData)
 			.then(() => {
+				
 				res.json({ success: true });
 			})
 			.catch((error) => {

@@ -91,15 +91,16 @@ function Results() {
 					<Header />
 					<div className="inputs">
 						<h1>
-							<strong>Your search</strong>
+							<strong>Your search:</strong>
 						</h1>
-						<div>
+						<div className="fromandto">
 							{fromInput} - {toInput}
 						</div>
-						<div>Depart: {formatDepartDate}</div>
-						{tripWay === "Return" && <div>Return: {formatReturnDate}</div>}
-						<div>Travellers: {travellers}</div>
-						<div>Cabin class: {cabinClass}</div>
+						<div>Date of Departure: <span className="depart-date">{formatDepartDate}</span></div>
+						{tripWay === "Return" && <div>
+							Return:  <span className="return-date">{formatReturnDate}</span></div>}
+						<div>Travellers: <span className="travellercount">{travellers}</span></div>
+						<div>Cabin class: <span className="cabinclass">{cabinClass}</span></div>
 					</div>
 					<Email flightInfo={flightInfo} />
 				</div>

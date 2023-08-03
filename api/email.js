@@ -19,6 +19,7 @@ function generateEmailSubject(drop, leaveFrom, goTo, currentPrice) {
 }
 
 async function sendEmail(sampleInputs) {
+	console.log(sampleInputs);
 	const leavingFrom = sampleInputs.fromInput;
 	const goingTo = sampleInputs.toInput;
 	const transporter = nodemailer.createTransport({
@@ -130,7 +131,7 @@ const testing = {
 }
 sendEmail(testing);*/
 
-const intervalId = setInterval(sendEmail, 6 * 60 * 60 * 1000); //sends every 6h
+const intervalId = setInterval(sendEmail, 5 * 60 * 1000); //sends every 6h
 
 setTimeout(() => {
 	clearInterval(intervalId); // Stop the interval

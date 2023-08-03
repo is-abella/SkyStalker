@@ -1,0 +1,77 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+
+.view-details-button {
+    /*display: inline-block;*/
+    background-color: rgb(179, 177, 240);
+    color: #fffcfc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    /*margin-top: 10px;*/
+    position: absolute; /* Add absolute positioning */
+    bottom: 20px; /* Set the distance from the bottom */
+    right: 20px; 
+    
+  }
+  
+  .view-details-button:hover {
+    background-color: rgba(208, 186, 248, 0.617);
+  }
+  
+  
+  /* Styling for the airline name */
+  .airline {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    font-style: italic;
+    font-weight: lighter;
+  }
+  
+  /* Styling for the price */
+  .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #031120;
+    font-weight: bolder;
+    margin-top: -5px;
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .going .details,
+.return .details {
+  margin-bottom: 5px;
+}
+.option {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 40px;
+    position: relative; /* Add relative positioning to the option container */
+  }
+
+  .cabin-class {
+  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    font-weight: lighter;
+    font-style: italic;
+
+  }
+
+
+
+
+
+
+
+
+
+  

@@ -87,3 +87,11 @@
 .price {
 	font-weight: bold;
 }
+
+.return-date,
+.depart-date,
+.travellercount,
+.cabinclass,
+.fromandto {
+	font-style: italic;
+}
