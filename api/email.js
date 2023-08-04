@@ -9,7 +9,7 @@ let isFirstEmail = true;
 function generateEmailSubject(drop, leaveFrom, goTo, currentPrice) {
 	const priceString = `$${currentPrice.toFixed(2)}`;
 	if (isFirstEmail) {
-		return "Welcome to SkyStalker's email alerts!";
+		return "Welcome to skystalker's email alerts!";
 	} else if (drop) {
 		const previousPriceString = `$${previousPrice.toFixed(2)}`;
 		return `Flight from ${leaveFrom} to ${goTo}: ${previousPriceString} ➜ ${priceString}`;
@@ -79,20 +79,20 @@ async function sendEmail(sampleInputs) {
 
 		let greeting = "";
 		if (isFirstEmail) {
-			greeting = `<h2>Hi user,</h2>
+			greeting = `<h2>Hello!</h2>
                   <p>Thank you for subscribing to our email alerts.
                   Here are some of the cheapest flight options currently available for your selected flight:</p>`;
 			isFirstEmail = false;
 		} else {
 			const priceDifference = previousPrice - currentPrice;
 			if (priceDrop) {
-				greeting = `<h2>Hi user,</h2>
+				greeting = `<h2>Hello!</h2>
                     <p>The price of your chosen flight has decreased by $${priceDifference.toFixed(
 						2
 					)}.
                     Here are the current cheapest flight options available:</p>`;
 			} else {
-				greeting = `<h2>Hi user,</h2>
+				greeting = `<h2>Hello!</h2>
                     <p>The prices of your preferred flight have not decreased so far.
                     Below are a few of the cheapest flight options we currently have:</p>`;
 			}
@@ -114,27 +114,26 @@ async function sendEmail(sampleInputs) {
 	}
 }
 
-
 function startEmailAlerts(sampleInputs) {
 	// Function to send the email immediately
 	async function sendImmediateEmail() {
-	  try {
-		await sendEmail(sampleInputs);
-	  } catch (error) {
-		console.log("Error sending immediate email:", error);
-	  }
+		try {
+			await sendEmail(sampleInputs);
+		} catch (error) {
+			console.log("Error sending immediate email:", error);
+		}
 	}
-	
+
 	// Send the immediate email
 	sendImmediateEmail();
-	
+
 	// Schedule the recurring emails every 5 hours
 	const intervalId = setInterval(sendImmediateEmail, 5 * 60 * 60 * 1000); // Sends every 5 hours
-	
+
 	// Stop the interval after 42 hours
 	setTimeout(() => {
-	  clearInterval(intervalId); // Stop the interval
-	  console.log("Email sending stopped after 42 Hours.");
+		clearInterval(intervalId); // Stop the interval
+		console.log("Email sending stopped after 42 Hours.");
 	}, 8 * 6 * 60 * 60 * 1000);
 }
 /*
