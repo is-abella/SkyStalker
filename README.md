@@ -28,5 +28,10 @@ A flight tracking website that leverages web scraping techniques to find the che
     npm start
     ```
 
+Note:
+
+Server has to be kept running for email alerts to be sent at regular intervals.
+
 Image credits:
+
 Photo by <a href="https://unsplash.com/@muzammilo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Muzammil Soorma</a> on <a href="https://unsplash.com/s/photos/skyline?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
