@@ -42,7 +42,7 @@ function Home() {
 
 	const styles = {
 		height: "42vh",
-		backgroundImage: `linear-gradient( rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 10) 99%), url("/images/background.png")`,
+		backgroundImage: `linear-gradient( rgba(255, 255, 255, 0.1) 66%, rgba(255, 255, 255, 10) 99%), url("/images/background.png")`,
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center",

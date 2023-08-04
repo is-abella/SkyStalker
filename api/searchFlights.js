@@ -194,6 +194,8 @@ async function findCheapestFlights(flightInfo) {
       const browser = await puppeteer.launch({headless : false}); 
       const page = await browser.newPage();
       await page.goto(strUrl);
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
       try {
         await page.waitForSelector('.nrc6', 5000);
       } catch (error) {
@@ -206,6 +208,8 @@ async function findCheapestFlights(flightInfo) {
       await page.waitForSelector('.JWEO-stops-text');
       await page.waitForSelector('.vmXl.vmXl-mod-variant-default');
       await page.waitForSelector('.f8F1-price-text');
+      await page.waitForSelector('.Iqt3-mod-stretch');
+      await page.waitForSelector('img');
   
       const data = await page.$$eval('.nrc6', (flights, flightWay) => {
           //const flights = document.querySelectorAll('.nrc6'); 
@@ -213,29 +217,41 @@ async function findCheapestFlights(flightInfo) {
           const counter = flights.length < 5 ? flights.length : 5; 
           for (i=0; i<counter; i++) {    
             if (flightWay === 'Return') {
+
+              //const imgElement = flights[i].querySelectorAll('img');
+
               const goThere = {
                 stops: flights[i].querySelectorAll('.JWEO-stops-text')[0].innerText,
                 flightTiming: flights[i].querySelectorAll('.vmXl.vmXl-mod-variant-large')[0].innerText,
                 flightDuration: flights[i].querySelectorAll('.vmXl.vmXl-mod-variant-default')[1].innerText,
+                //imgLinkOne: imgElement[1].getAttribute('src'),
+                //imgLinkTwo: imgElement[2].getAttribute('src'),
               }
               const comeBack = {
                 stops: flights[i].querySelectorAll('.JWEO-stops-text')[1].innerText,
                 flightTiming: flights[i].querySelectorAll('.vmXl.vmXl-mod-variant-large')[1].innerText,
                 flightDuration: flights[i].querySelectorAll('.vmXl.vmXl-mod-variant-default')[3].innerText,
+                //imgLinkOne: imgElement[4].getAttribute('src'),
+                //imgLinkTwo: imgElement[5].getAttribute('src'),
               }
               array.push({
+                  link: flights[i].querySelector('.Iqt3-mod-stretch').href,
                   airlines: flights[i].querySelector('.J0g6-operator-text').innerText,
                   price: flights[i].querySelector('.f8F1-price-text').innerText,
                   goingToDetails : goThere,
-                  comingBackDetails : comeBack
+                  comingBackDetails : comeBack,
               })
             } else {
+              //const imgElement = flights[i].querySelectorAll('img');
               array.push({
+                link: flights[i].querySelector('.Iqt3-mod-stretch').href,
                 flightTiming: flights[i].querySelector('.vmXl.vmXl-mod-variant-large').innerText,
                 airlines: flights[i].querySelector('.J0g6-operator-text').innerText,
                 stops: flights[i].querySelector('.JWEO-stops-text').innerText,
                 flightDuration: flights[i].querySelectorAll('.vmXl.vmXl-mod-variant-default')[1].innerText,
-                price: flights[i].querySelector('.f8F1-price-text').innerText
+                price: flights[i].querySelector('.f8F1-price-text').innerText,
+                //imgLinkOne: imgElement[0].getAttribute('src'),
+                //imgLinkTwo: imgElement[1].getAttribute('src'),
               })
             }
           }
@@ -251,5 +267,22 @@ async function findCheapestFlights(flightInfo) {
   
 }
 
+const testing = {
+  fromInput: 'PEN',
+  toInput: 'XMN',
+  departDate: '29/09/2023',
+  returnDate: '26/09/2023',
+  travellers: 2,
+  cabinClass: 'Business',
+  adults: 1,
+  youths: 1,
+  children: 0,
+  toddlers: 0,
+  infants: 0,
+  tripWay: 'One-way',
+  email:'demeterrxy@gmail.com'
+}
+
+//findCheapestFlights(testing);
 
 export {findCheapestFlights};

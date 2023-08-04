@@ -90,20 +90,11 @@
 	font-weight: bold;
 }
 
-.going .details,
-.return .details {
-  flex: 1;
-}
+.return-date,
+.depart-date,
+.travellercount,
+.cabinclass,
+.fromandto {
+	font-style: italic;
 
-.going .stops,
-.return .stops,
-.going .duration,
-.return .duration {
-  flex: 1;
-  white-space: nowrap;
-}
-
-.going .time,
-.return .time {
-  min-width: 150px;
 }

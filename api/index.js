@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { findCheapestFlights } from "./searchFlights.js";
-import sendEmail from "./email.js";
+import startEmailAlerts from "./email.js";
 
 const app = express();
 app.use(express.json());
@@ -34,9 +34,10 @@ app.listen(3000, () => {
 app.post("/send-email", (req, res) => {
 	try {
 		const flightData = req.body;
-
-		sendEmail(flightData)
+		//console.log(flightData)
+		startEmailAlerts(flightData)
 			.then(() => {
+				
 				res.json({ success: true });
 			})
 			.catch((error) => {
