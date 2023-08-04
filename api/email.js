@@ -116,19 +116,27 @@ async function sendEmail(sampleInputs) {
 
 
 function startEmailAlerts(sampleInputs) {
-	const intervalId = setInterval(async () => {
+	// Function to send the email immediately
+	async function sendImmediateEmail() {
 	  try {
 		await sendEmail(sampleInputs);
 	  } catch (error) {
-		console.log("Error sending email:", error);
+		console.log("Error sending immediate email:", error);
 	  }
-	}, 5 * 60 * 60 * 1000); // Sends every 5 minutes
-  
+	}
+	
+	// Send the immediate email
+	sendImmediateEmail();
+	
+	// Schedule the recurring emails every 5 hours
+	const intervalId = setInterval(sendImmediateEmail, 5 * 60 * 60 * 1000); // Sends every 5 hours
+	
+	// Stop the interval after 42 hours
 	setTimeout(() => {
 	  clearInterval(intervalId); // Stop the interval
 	  console.log("Email sending stopped after 42 Hours.");
 	}, 8 * 6 * 60 * 60 * 1000);
-  }
+}
 /*
 const testing = {
     fromInput: 'PEN',
@@ -145,10 +153,6 @@ const testing = {
     tripWay: 'One-way',
     email:'demeterrxy@gmail.com'
 }
-sendEmail(testing);
-
-const intervalId = setInterval(sendEmail, 5 * 60 * 1000); //sends every 6h
-
 setTimeout(() => {
 	clearInterval(intervalId); // Stop the interval
 	console.log("Email sending stopped after 42 Hours.");
