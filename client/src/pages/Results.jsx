@@ -96,11 +96,22 @@ function Results() {
 						<div className="fromandto">
 							{fromInput} - {toInput}
 						</div>
-						<div>Date of Departure: <span className="depart-date">{formatDepartDate}</span></div>
-						{tripWay === "Return" && <div>
-							Return:  <span className="return-date">{formatReturnDate}</span></div>}
-						<div>Travellers: <span className="travellercount">{travellers}</span></div>
-						<div>Cabin class: <span className="cabinclass">{cabinClass}</span></div>
+						<div>
+							Date of Departure:{" "}
+							<span className="depart-date">{formatDepartDate}</span>
+						</div>
+						{tripWay === "Return" && (
+							<div>
+								Date of Return:{" "}
+								<span className="return-date">{formatReturnDate}</span>
+							</div>
+						)}
+						<div>
+							Travellers: <span className="travellercount">{travellers}</span>
+						</div>
+						<div>
+							Cabin class: <span className="cabinclass">{cabinClass}</span>
+						</div>
 					</div>
 					<Email flightInfo={flightInfo} />
 				</div>
